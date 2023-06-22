@@ -11,8 +11,12 @@ def create_app():
     
     from .userAPI import userAPI
     from .recipeAPI import recipeAPI
+    from .categoryAPI import categoryAPI
+    from .allergenAPI import allergenAPI
     
     app.register_blueprint(userAPI, url_prefix = '/users')
     app.register_blueprint(recipeAPI, url_prefix = '/recipes')
+    app.register_blueprint(categoryAPI, url_prefix = '/categories')
+    app.register_blueprint(allergenAPI, url_prefix = '/allergens')
     
     return app

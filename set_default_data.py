@@ -107,52 +107,82 @@ def create_categories():
     categories_collection = db.collection('categories')
     categories_data = [
         {
+            'id': 1,
             'nazwa': 'dania główne'
         },
         {
+            'id': 2,
             'nazwa': 'desery'
         },
         {
+            'id': 3,
             'nazwa': 'sałatki'
         },
         {
+            'id': 4,
             'nazwa': 'zupy'
         },
         {
+            'id': 5,
             'nazwa': 'napoje'
         }
     ]
 
     for category in categories_data:
-        categories_collection.add(category)
+        category_id = str(category.pop("id"))
+        categories_collection.document(category_id).set(category) 
 
     print('Utworzono kolekcję Kategorie.')
+    
+def delete_all_categories():
+    categories_collection = db.collection('categories')
+    categories = categories_collection.stream()
+
+    for category in categories:
+        category.reference.delete()
+
+    print('Usunięto wszystkie kategorie.')
 
 
 def create_allergens():
     allergens_collection = db.collection('allergens')
     allergens_data = [
         {
+            'id': 1,
             'nazwa': 'gluten'
         },
         {
+            'id': 2,
             'nazwa': 'mleko'
         },
         {
+            'id': 3,
             'nazwa': 'jajka'
         },
         {
+            'id': 4,
             'nazwa': 'orzechy'
         },
         {
+            'id': 5,
             'nazwa': 'soja'
         }
     ]
 
     for allergen in allergens_data:
-        allergens_collection.add(allergen)
+        allergen_id = str(allergen.pop("id"))
+        allergens_collection.document(allergen_id).set(allergen) 
 
     print('Utworzono kolekcję Alergeny.')
+    
+def delete_all_allergens():
+    allergens_collection = db.collection('allergens')
+    allergens = allergens_collection.stream()
+
+    for allergen in allergens:
+        allergen.reference.delete()
+
+    print('Usunięto wszystkie allergeny.')
 
 
 def reset_to_defaults():
@@ -160,7 +190,9 @@ def reset_to_defaults():
     add_recipes()
     delete_all_users()
     add_users()
+    delete_all_categories()
     create_categories()
+    delete_all_allergens()
     create_allergens()
 
     print("\nUtworzenie domyślnej struktury i uzupełnienie podstawowymi danymi zakończone\n")
