@@ -10,7 +10,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'j4jizkQKmLB3QNptm0BPGRMxOC6Ev3iiI4yqRoJU'
     
     from .userAPI import userAPI
+    from .recipeAPI import recipeAPI
     
     app.register_blueprint(userAPI, url_prefix = '/users')
+    app.register_blueprint(recipeAPI, url_prefix = '/recipes')
     
     return app

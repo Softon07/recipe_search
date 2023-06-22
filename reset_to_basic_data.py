@@ -11,6 +11,7 @@ def add_recipes():
     recipes_collection = db.collection('recipes')
     recipe_data = [
         {
+            'id': 1,
             'nazwa': 'Spaghetti Bolognese',
             'skladniki': ['makaron', 'mielone mięso', 'cebula', 'czosnek', 'sos pomidorowy'],
             'opis_przygotowania': '1. Ugotuj makaron. 2. Usmaż mięso mielone i cebulę. 3. Dodaj czosnek i sos pomidorowy. 4. Gotuj na małym ogniu i podawaj na makaronie.',
@@ -20,6 +21,7 @@ def add_recipes():
             'alergeny': ''
         },
         {
+            'id': 2,
             'nazwa': 'Ciasteczka z kawałkami czekolady',
             'skladniki': ['mąka', 'masło', 'cukier', 'kawałki czekolady'],
             'opis_przygotowania': '1. Rozgrzej piekarnik. 2. Utłucz masło z cukrem. 3. Dodaj mąkę i kawałki czekolady. 4. Piecz ciasteczka.',
@@ -29,6 +31,7 @@ def add_recipes():
             'alergeny': ''
         },
         {
+            'id': 3,
             'nazwa': 'Kurczak Parmezan',
             'skladniki': ['pierś z kurczaka', 'bułka tarta', 'ser Parmezan', 'sos marinara', 'ser mozzarella'],
             'opis_przygotowania': '1. Rozgrzej piekarnik. 2. Panieruj kurczaka w bułce tartej i serze Parmezan. 3. Usmaż kurczaka na patelni. 4. Posmaruj sosem marinara i dodaj ser mozzarella. 5. Piecz, aż ser się roztopi i będzie puszysty.',
@@ -38,6 +41,7 @@ def add_recipes():
             'alergeny': ''
         },
         {
+            'id': 4,
             'nazwa': 'Sałatka Cezar',
             'skladniki': ['sałata rzymska', 'grzanki', 'ser Parmezan', 'sos Cezar'],
             'opis_przygotowania': '1. Umyj i pokrój sałatę. 2. Dodaj grzanki, ser Parmezan i sos Cezar. 3. Podawaj schłodzone.',
@@ -47,9 +51,10 @@ def add_recipes():
             'alergeny': ''
         }
     ]
-
+    
     for recipe in recipe_data:
-        recipes_collection.add(recipe)
+        recipe_id = str(recipe.pop("id"))
+        recipes_collection.document(recipe_id).set(recipe) 
 
     print('Dodano przepisy.')
 
@@ -82,8 +87,8 @@ def add_users():
     ]
 
     for user in user_data:
-        user_id = str(user.pop("id"))  # Przekonwertuj id na string
-        users_collection.document(user_id).set(user)  # Użyj id jako nazwy dokumentu
+        user_id = str(user.pop("id"))
+        users_collection.document(user_id).set(user) 
 
     print('Dodano użytkowników.')
 

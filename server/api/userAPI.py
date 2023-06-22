@@ -11,7 +11,7 @@ userAPI = Blueprint('userAPI', __name__)
 # GET
 # Pobierz dane o wszystkich użytkownikach 
 @userAPI.route('/', methods=['GET'])
-def read():
+def get_all_users():
     try:
         all_users = [doc.to_dict() for doc in user_Ref.stream()]
         return jsonify(all_users), 200
